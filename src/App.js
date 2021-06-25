@@ -1,5 +1,5 @@
 import { Lightning, Utils } from '@lightningjs/sdk'
-import { Row, Icon } from '@lightningjs/ui-components'
+import { Row, Icon, Button } from '@lightningjs/ui-components'
 
 export default class App extends Lightning.Component {
   static _template() {
@@ -34,12 +34,27 @@ export default class App extends Lightning.Component {
           textColor: 0xcccccccc,
         },
       },
+      TextIndex: {
+        x: 405,
+        y: 470,
+        w: 1100,
+        text: {
+          text: '99',
+          fontFace: 'Segoe Print, Arial',
+          fontSize: 36,
+          wordWrapWidth: 1100,
+          textAlign: 'center',
+          textColor: 0xcccccccc,
+        },
+      },
       RowOfFilmImages: {
         type: Row,
         x: 10,
         y: 200,
+        width: 1000,
+        height: 250,
         itemSpacing: 10,
-        scrollIndex: 3,
+        scrollIndex: 1,
         items: Array.apply(null, { length: 16 }).map((_, i) => ({
           type: Icon,
           w: 150,
@@ -48,6 +63,10 @@ export default class App extends Lightning.Component {
         })),
       },
     }
+  }
+
+  _getFocused() {
+    return this.tag('RowOfFilmImages')
   }
 
   _init() {}

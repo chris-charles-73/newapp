@@ -3,7 +3,7 @@
  * SDK version: 4.4.0
  * CLI version: 2.5.0
  * 
- * Generated: Fri, 25 Jun 2021 07:48:15 GMT
+ * Generated: Fri, 25 Jun 2021 08:51:33 GMT
  */
 
 var APP_com_metrological_app_newapp = (function () {
@@ -6619,12 +6619,27 @@ var APP_com_metrological_app_newapp = (function () {
             textColor: 0xcccccccc,
           },
         },
+        TextIndex: {
+          x: 405,
+          y: 470,
+          w: 1100,
+          text: {
+            text: '99',
+            fontFace: 'Segoe Print, Arial',
+            fontSize: 36,
+            wordWrapWidth: 1100,
+            textAlign: 'center',
+            textColor: 0xcccccccc,
+          },
+        },
         RowOfFilmImages: {
           type: Row,
           x: 10,
           y: 200,
+          width: 1000,
+          height: 250,
           itemSpacing: 10,
-          scrollIndex: 3,
+          scrollIndex: 1,
           items: Array.apply(null, { length: 16 }).map((_, i) => ({
             type: Icon,
             w: 150,
@@ -6633,6 +6648,10 @@ var APP_com_metrological_app_newapp = (function () {
           })),
         },
       }
+    }
+
+    _getFocused() {
+      return this.tag('RowOfFilmImages')
     }
 
     _init() {}
