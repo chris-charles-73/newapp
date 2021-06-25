@@ -3,7 +3,7 @@
  * SDK version: 4.4.0
  * CLI version: 2.5.0
  * 
- * Generated: Fri, 25 Jun 2021 08:51:33 GMT
+ * Generated: Fri, 25 Jun 2021 15:21:05 GMT
  */
 
 var APP_com_metrological_app_newapp = (function () {
@@ -5984,6 +5984,174 @@ var APP_com_metrological_app_newapp = (function () {
    *
    * SPDX-License-Identifier: Apache-2.0
    */
+  /**
+   * Returns a styles object for use by components
+   * @param {Object|function} styles - Object or callback that takes theme as an argument, ultimately the returned value
+   * @param {Object} theme - theme to be provided to styles
+   */
+  var createStyles = (styles, theme) => {
+    return typeof styles === 'function' ? styles(theme) : styles;
+  };
+
+  /**
+   * Copyright 2020 Comcast Cable Communications Management, LLC
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
+   */
+
+  /**
+   * Helpers for lng.Tools.getRoundRect
+   */
+  const RoundRect = {
+    /**
+     * Returns a value that will render as the given width (w)
+     * when passed to lng.Tools.getRoundRect
+     * @param {number} w - px value for expected width
+     * @param {*} options
+     * @param {number} options.padding - px value for both left and right padding
+     * @param {number} options.paddingLeft - px value for left padding, overrides options.padding
+     * @param {number} options.paddingRight - px value for right padding, overrides options.padding
+     * @param {number} options.strokeWidth - px value for stroke width
+     */
+    getWidth(w, options = {}) {
+      const { padding, paddingLeft, paddingRight, strokeWidth } = {
+        padding: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        strokeWidth: 0,
+        ...options
+      };
+
+      if (!w) return 0;
+
+      return (
+        w - (paddingLeft || padding) - (paddingRight || padding) - strokeWidth
+      );
+    },
+    /**
+     * Returns a value that will render as the given height (h)
+     * when passed to lng.Tools.getRoundRect
+     * @param {number} h - px value for expected width
+     * @param {*} options
+     * @param {number} options.padding - px value for both bottom and top padding
+     * @param {number} options.paddingBottom - px value for bottom padding, overrides options.padding
+     * @param {number} options.paddingTop - px value for top padding, overrides options.padding
+     * @param {number} options.strokeWidth - px value for stroke width
+     */
+    getHeight(h, options = {}) {
+      const { padding, paddingBottom, paddingTop, strokeWidth } = {
+        padding: 0,
+        paddingBottom: 0,
+        paddingTop: 0,
+        strokeWidth: 0,
+        ...options
+      };
+
+      if (!h) return 0;
+
+      return (
+        h - (paddingBottom || padding) - (paddingTop || padding) - strokeWidth
+      );
+    }
+  };
+
+  /**
+   * Merges two objects together and returns the duplicate.
+   *
+   * @param {Object} target - object to be cloned
+   * @param {Object} [object] - secondary object to merge into clone
+   */
+  function clone(target, object) {
+    const _clone = { ...target };
+    if (!object || target === object) return _clone;
+
+    for (let key in object) {
+      const value = object[key];
+      if (target.hasOwnProperty(key)) {
+        _clone[key] = getMergeValue(key, target, object);
+      } else {
+        _clone[key] = value;
+      }
+    }
+
+    return _clone;
+  }
+
+  function getMergeValue(key, target, object) {
+    const targetVal = target[key];
+    const objectVal = object[key];
+    const targetValType = typeof targetVal;
+    const objectValType = typeof objectVal;
+
+    if (
+      targetValType !== objectValType ||
+      objectValType === 'function' ||
+      Array.isArray(objectVal)
+    ) {
+      return objectVal;
+    }
+
+    if (objectVal && objectValType === 'object') {
+      return clone(targetVal, objectVal);
+    }
+
+    return objectVal;
+  }
+
+  /**
+   * Returns the rendered width of a given text texture
+   * @param {Object} text - text texture properties
+   * @param {string} text.text - text value
+   * @param {string} text.fontStyle - css font-style property
+   * @param {(string|number)} text.fontWeight - css font-weight property
+   * @param {string} [fontSize=0] - css font-size property (in px)
+   * @param {string} [text.fontFamily=sans-serif] - css font-weight property
+   * @param {string} text.fontFace - alias for fontFamily
+   *
+   * @returns {number} text width
+   * */
+  function measureTextWidth(text = {}) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const {
+      fontStyle,
+      fontWeight,
+      fontSize,
+      fontFamily = text.fontFace || 'sans-serif'
+    } = text;
+    const fontCss = [
+      fontStyle,
+      fontWeight,
+      fontSize ? `${fontSize}px` : '0',
+      `'${fontFamily}'`
+    ]
+      .filter(Boolean)
+      .join(' ');
+    ctx.font = fontCss;
+    const textMetrics = ctx.measureText(text.text || '');
+
+    return Math.round(textMetrics.width);
+  }
+
+  /**
+   * Returns first argument that is a number. Useful for finding ARGB numbers. Does not convert strings to numbers
+   * @param {...*} number - maybe a number
+   **/
+  function getFirstNumber(...numbers) {
+    return numbers.find(Number.isFinite);
+  }
 
   /**
    * Naively looks for dimensional prop (i.e. w, h, x, y, etc.), first searching for
@@ -6073,6 +6241,35 @@ var APP_com_metrological_app_newapp = (function () {
   var debounce_1 = debounce;
 
   /**
+  * Copyright 2020 Comcast Cable Communications Management, LLC
+  *
+  * Licensed under the Apache License, Version 2.0 (the "License");
+  * you may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at
+  *
+  * http://www.apache.org/licenses/LICENSE-2.0
+  *
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  *
+  * SPDX-License-Identifier: Apache-2.0
+  */
+
+  function withStyles(Base, styles, theme) {
+    const _theme = theme || Base.theme;
+    const _styles = Base.styles ? clone(Base.styles, createStyles(styles, _theme)) : createStyles(styles, _theme);
+
+    return class extends Base {
+      static get name() { return Base.name }
+      static get styles() { return _styles };
+      get styles() { return _styles }
+    }
+  }
+
+  /**
    * Copyright 2020 Comcast Cable Communications Management, LLC
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
@@ -6145,6 +6342,349 @@ var APP_com_metrological_app_newapp = (function () {
     }
     return template;
   }
+
+  /**
+   * Copyright 2020 Comcast Cable Communications Management, LLC
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
+   */
+
+  const styles = {
+    w: 150,
+    h: 40,
+    radius: 0,
+    background: { color: 0xff1f1f1f },
+    icon: { color: 0xffffffff },
+    text: {
+      fontSize: 20,
+      color: 0xffffffff
+    },
+    padding: 50,
+    stroke: {
+      color: 0x00,
+      weight: 2
+    },
+    focused: {
+      background: { color: 0xffffffff },
+      text: { color: 0xff1f1f1f },
+      icon: { color: 0xff1f1f1f }
+    }
+  };
+
+  class Button extends lng.Component {
+    static _template() {
+      return {
+        w: this.styles.w,
+        h: this.styles.h,
+        radius: this.styles.radius,
+        strokeColor: this.styles.stroke.color,
+        strokeWeight: this.styles.stroke.weight,
+        Content: {
+          mount: 0.5,
+          x: w => w / 2,
+          y: h => h / 2,
+          flex: {
+            direction: 'row',
+            alignContent: 'center',
+            alignItems: 'center'
+          },
+          Icon: {
+            type: Icon
+          },
+          // TODO: Wonky lineHeight / fontsize from Lightning
+          // Move title down 2 pixels to _visually_ center it
+          // inside the button
+          Title: { y: 2 }
+        },
+        Stroke: {
+          zIndex: -1,
+          mount: 0.5,
+          x: w => w / 2,
+          y: h => h / 2
+        }
+      };
+    }
+
+    _construct() {
+      this._focused = false;
+      this._whenEnabled = new Promise(
+        resolve => (this._enable = resolve),
+        console.error
+      );
+      this._strokeWeight = 2;
+      this._strokeColor = 0x00;
+    }
+
+    _init() {
+      this._update();
+    }
+
+    _focus() {
+      if (this._smooth === undefined) this._smooth = true;
+      this._focused = true;
+      this._update();
+    }
+
+    _unfocus() {
+      this._focused = false;
+      this._update();
+    }
+
+    _updateColor() {
+      const color = this._focused
+        ? getFirstNumber(
+            this.focusedBackground,
+            this.styles.focused.background.color
+          )
+        : getFirstNumber(this.background, this.styles.background.color);
+      if (this._smooth) {
+        this.smooth = { color };
+      } else {
+        this.color = color;
+      }
+    }
+
+    _updateTitle() {
+      if (this.title) {
+        this._Title.text = {
+          ...this.styles.text,
+          fontColor: this.styles.text.color,
+          fontSize: this.fontSize || this.styles.text.fontSize,
+          fontFamily:
+            this.styles.text.fontFace ||
+            this.styles.text.fontFamily ||
+            this.stage._options.defaultFontFace,
+          text: this.title
+        };
+
+        const color = this._focused
+          ? getFirstNumber(this.focusedTextColor, this.styles.focused.text.color)
+          : getFirstNumber(this.textColor, this.styles.text.color);
+        if (this._smooth) {
+          this._Title.smooth = { color };
+        } else {
+          this._Title.color = color;
+        }
+      } else {
+        this._Title.texture = false;
+      }
+    }
+
+    _updateIcon() {
+      if (this.icon) {
+        const { color, size, spacing, src } = this.icon;
+        this._Icon.patch({
+          w: size,
+          h: size,
+          icon: src,
+          flexItem: { marginRight: this.title ? spacing : 0 }
+        });
+
+        const iconColor = this._focused
+          ? getFirstNumber(this.focusedIconColor, this.styles.focused.icon.color)
+          : getFirstNumber(color, this.styles.icon.color);
+        if (this._smooth) {
+          this._Icon.smooth = { color: iconColor };
+        } else {
+          this._Icon.color = iconColor;
+        }
+      } else {
+        this._Icon.patch({
+          w: 0,
+          h: 0,
+          texture: false,
+          flexItem: false
+        });
+      }
+    }
+
+    _updateStroke() {
+      if (this.stroke && !this._focused) {
+        const radius = this.radius || this.styles.radius;
+
+        this.texture = lng.Tools.getRoundRect(
+          RoundRect.getWidth(this.w),
+          RoundRect.getHeight(this.h),
+          radius,
+          0x00,
+          true,
+          0xffffffff
+        );
+
+        this._Stroke.color = this.strokeColor;
+        this._Stroke.texture = lng.Tools.getRoundRect(
+          RoundRect.getWidth(this.w),
+          RoundRect.getHeight(this.h),
+          radius,
+          this.strokeWeight,
+          0xffffffff,
+          true,
+          this.background
+        );
+      } else {
+        const radius = this.radius || this.styles.radius;
+        this.texture = lng.Tools.getRoundRect(
+          RoundRect.getWidth(this.w),
+          RoundRect.getHeight(this.h),
+          radius
+        );
+        this._Stroke.texture = false;
+      }
+    }
+
+    _updateWidth() {
+      if (!this.fixed) {
+        const iconSize = this._icon ? this._icon.size + this._icon.spacing : 0;
+        const padding = getFirstNumber(this.padding, this.styles.padding, 10);
+        const w =
+          measureTextWidth(this._Title.text || {}) + padding * 2 + iconSize;
+
+        if (w && w !== this.w) {
+          this.w = w > this.styles.w ? w : this.styles.w;
+          this.fireAncestors('$itemChanged');
+          this.signal('buttonWidthChanged', { w: this.w });
+        }
+      }
+    }
+
+    _update() {
+      this._whenEnabled.then(() => {
+        this._updateColor();
+        this._updateTitle();
+        this._updateIcon();
+        this._updateStroke();
+        this._updateWidth();
+      });
+    }
+
+    _handleEnter() {
+      if (typeof this.onEnter === 'function') {
+        this.onEnter(this);
+      }
+    }
+
+    get radius() {
+      return this._radius;
+    }
+
+    set radius(radius) {
+      if (this._radius !== radius) {
+        this._radius = radius;
+        this._update();
+      }
+    }
+
+    get title() {
+      return this._title;
+    }
+
+    set title(title) {
+      if (this._title !== title) {
+        this._title = title;
+        this._update();
+      }
+    }
+
+    get icon() {
+      return this._icon;
+    }
+
+    set icon({ src, size = 20, spacing = 5, color = 0xffffffff }) {
+      if (src) {
+        this._icon = { src, size, spacing, color };
+      } else {
+        this._icon = null;
+      }
+      this._update();
+    }
+
+    get strokeWeight() {
+      return this._strokeWeight;
+    }
+
+    set strokeWeight(strokeWeight) {
+      if (this._strokeWeight !== strokeWeight) {
+        this._strokeWeight = strokeWeight;
+        this._update();
+      }
+    }
+
+    get strokeColor() {
+      return this._strokeColor;
+    }
+
+    set strokeColor(strokeColor) {
+      if (this._strokeColor !== strokeColor) {
+        this._strokeColor = strokeColor;
+        this._update();
+      }
+    }
+
+    get stroke() {
+      return this._stroke;
+    }
+
+    set stroke(stroke) {
+      if (this._stroke !== stroke) {
+        this._stroke = stroke;
+        this._update();
+      }
+    }
+
+    get w() {
+      return this._w;
+    }
+
+    set w(w) {
+      if (this._w !== w) {
+        this._w = w;
+        this._update();
+      }
+    }
+
+    set label(label) {
+      this._label = label;
+    }
+
+    get label() {
+      return this._label || this._title;
+    }
+
+    get announce() {
+      // TODO - Localization?
+      // Do we need a locale file with
+      // component translations?
+      return this.label + ', Button';
+    }
+
+    get _Content() {
+      return this.tag('Content');
+    }
+
+    get _Title() {
+      return this.tag('Content.Title');
+    }
+    get _Icon() {
+      return this.tag('Content.Icon');
+    }
+    get _Stroke() {
+      return this.tag('Stroke');
+    }
+  }
+
+  var Button$1 = withStyles(Button, styles);
 
   /**
    * Copyright 2020 Comcast Cable Communications Management, LLC
@@ -6592,44 +7132,52 @@ var APP_com_metrological_app_newapp = (function () {
         Background: {
           w: 1920,
           h: 1080,
-          color: 0x0a0a0a0a,
+          type: Icon,
+          color: 0xffffffff,
+          src: Utils.asset('images/background.png'),
+        },
+        BackgroundImage: {
+          w: 1920,
+          h: 1080,
+          type: Icon,
+          color: 0xaaaaaaaa,
           src: Utils.asset('images/logo_now.png'),
         },
         TextTitle: {
-          x: 740,
-          y: 100,
+          x: 785,
+          y: 90,
           text: {
-            text: 'Film title',
+            text: 'Logan',
             fontFace: 'Segoe Print, Arial',
             fontSize: 64,
             textAlign: 'center',
-            textColor: 0x44444444,
+            textColor: 0xff00ffff,
+          },
+        },
+        TextUpArrow: {
+          x: 853,
+          y: 430,
+          text: {
+            text: '^',
+            fontFace: 'Segoe Print, Arial',
+            fontSize: 120,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            textColor: 0x77777777,
           },
         },
         TextDescription: {
-          x: 405,
-          y: 525,
+          x: 355,
+          y: 530,
           text: {
             text:
-              'Film description film description Film description Film description Film description Film description Film description Film description Film description Film description Film description Film description Film description Film description Film description Film description Film description',
+              "In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan's attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces.",
             fontFace: 'Segoe Print, Arial',
-            fontSize: 36,
+            fontSize: 28,
             wordWrapWidth: 1100,
+            lineHeight: 40,
             textAlign: 'center',
-            textColor: 0xcccccccc,
-          },
-        },
-        TextIndex: {
-          x: 405,
-          y: 470,
-          w: 1100,
-          text: {
-            text: '99',
-            fontFace: 'Segoe Print, Arial',
-            fontSize: 36,
-            wordWrapWidth: 1100,
-            textAlign: 'center',
-            textColor: 0xcccccccc,
+            textColor: 0xd4d4d4d4,
           },
         },
         RowOfFilmImages: {
@@ -6639,12 +7187,13 @@ var APP_com_metrological_app_newapp = (function () {
           width: 1000,
           height: 250,
           itemSpacing: 10,
-          scrollIndex: 1,
+          scrollIndex: 0,
           items: Array.apply(null, { length: 16 }).map((_, i) => ({
+            type: Button$1,
             type: Icon,
             w: 150,
             h: 250,
-            icon: `static/images/film_${i}.jpg`,
+            src: `static/images/film_${i}.jpg`,
           })),
         },
       }
