@@ -3,7 +3,7 @@
  * SDK version: 4.4.0
  * CLI version: 2.5.0
  * 
- * Generated: Thu, 24 Jun 2021 19:17:47 GMT
+ * Generated: Fri, 25 Jun 2021 06:22:20 GMT
  */
 
 var APP_com_metrological_app_newapp = (function () {
@@ -493,7 +493,7 @@ var APP_com_metrological_app_newapp = (function () {
    * limitations under the License.
    */
 
-  var Lightning = window.lng;
+  var lng = window.lng;
 
   /*
    * If not stated otherwise in this file or this component's LICENSE file the
@@ -537,7 +537,7 @@ var APP_com_metrological_app_newapp = (function () {
     }
   };
 
-  class Mediaplayer extends Lightning.Component {
+  class Mediaplayer extends lng.Component {
     _construct() {
       this._skipRenderToTexture = false;
       this._metrics = null;
@@ -559,7 +559,7 @@ var APP_com_metrological_app_newapp = (function () {
             VideoTexture: {
               visible: false,
               pivot: 0.5,
-              texture: { type: Lightning.textures.StaticTexture, options: {} },
+              texture: { type: lng.textures.StaticTexture, options: {} },
             },
           },
         },
@@ -726,7 +726,7 @@ var APP_com_metrological_app_newapp = (function () {
         settings = Object.assign(settings, this._consumer.getMediaplayerSettings());
       }
 
-      if (!Lightning.Utils.equalValues(this._stream, settings.stream)) {
+      if (!lng.Utils.equalValues(this._stream, settings.stream)) {
         if (settings.stream && settings.stream.keySystem) {
           navigator
             .requestMediaKeySystemAccess(
@@ -897,7 +897,7 @@ var APP_com_metrological_app_newapp = (function () {
     }
 
     _setVideoArea(videoPos) {
-      if (Lightning.Utils.equalValues(this._videoPos, videoPos)) {
+      if (lng.Utils.equalValues(this._videoPos, videoPos)) {
         return
       }
 
@@ -1086,7 +1086,7 @@ var APP_com_metrological_app_newapp = (function () {
   };
 
   const isPage = v => {
-    if (v instanceof Lightning.Element || isComponentConstructor(v)) {
+    if (v instanceof lng.Element || isComponentConstructor(v)) {
       return true
     }
     return false
@@ -2308,7 +2308,7 @@ var APP_com_metrological_app_newapp = (function () {
    * limitations under the License.
    */
 
-  class VersionLabel extends Lightning.Component {
+  class VersionLabel extends lng.Component {
     static _template() {
       return {
         rect: true,
@@ -2357,12 +2357,12 @@ var APP_com_metrological_app_newapp = (function () {
    * See the License for the specific language governing permissions and
    * limitations under the License.
    */
-  class FpsIndicator extends Lightning.Component {
+  class FpsIndicator extends lng.Component {
     static _template() {
       return {
         rect: true,
         color: 0xffffffff,
-        texture: Lightning.Tools.getRoundRect(80, 80, 40),
+        texture: lng.Tools.getRoundRect(80, 80, 40),
         h: 80,
         w: 80,
         x: 100,
@@ -2371,7 +2371,7 @@ var APP_com_metrological_app_newapp = (function () {
         Background: {
           x: 3,
           y: 3,
-          texture: Lightning.Tools.getRoundRect(72, 72, 36),
+          texture: lng.Tools.getRoundRect(72, 72, 36),
           color: 0xff008000,
         },
         Counter: {
@@ -2883,7 +2883,7 @@ var APP_com_metrological_app_newapp = (function () {
   }
 
   function Application(App, appData, platformSettings) {
-    return class Application extends Lightning.Application {
+    return class Application extends lng.Application {
       constructor(options) {
         const config = cjs(defaultOptions, options);
         super(config);
@@ -3981,7 +3981,7 @@ var APP_com_metrological_app_newapp = (function () {
    * limitations under the License.
    */
 
-  class RoutedApp extends Lightning.Component {
+  class RoutedApp extends lng.Component {
     static _template() {
       return {
         Pages: {
@@ -4807,14 +4807,14 @@ var APP_com_metrological_app_newapp = (function () {
    * limitations under the License.
    */
 
-  class VideoTexture extends Lightning.Component {
+  class VideoTexture extends lng.Component {
     static _template() {
       return {
         Video: {
           alpha: 1,
           visible: false,
           pivot: 0.5,
-          texture: { type: Lightning.textures.StaticTexture, options: {} },
+          texture: { type: lng.textures.StaticTexture, options: {} },
         },
       }
     }
@@ -5642,7 +5642,7 @@ var APP_com_metrological_app_newapp = (function () {
    * limitations under the License.
    */
 
-  class ScaledImageTexture extends Lightning.textures.ImageTexture {
+  class ScaledImageTexture extends lng.textures.ImageTexture {
     constructor(stage) {
       super(stage);
       this._scalingOptions = undefined;
@@ -5684,7 +5684,7 @@ var APP_com_metrological_app_newapp = (function () {
    * limitations under the License.
    */
 
-  class PinInput extends Lightning.Component {
+  class PinInput extends lng.Component {
     static _template() {
       return {
         w: 120,
@@ -5692,7 +5692,7 @@ var APP_com_metrological_app_newapp = (function () {
         rect: true,
         color: 0xff949393,
         alpha: 0.5,
-        shader: { type: Lightning.shaders.RoundedRectangle, radius: 10 },
+        shader: { type: lng.shaders.RoundedRectangle, radius: 10 },
         Nr: {
           w: w => w,
           y: 24,
@@ -5736,7 +5736,7 @@ var APP_com_metrological_app_newapp = (function () {
     }
   }
 
-  class PinDialog extends Lightning.Component {
+  class PinDialog extends lng.Component {
     static _template() {
       return {
         zIndex: 1,
@@ -5752,7 +5752,7 @@ var APP_com_metrological_app_newapp = (function () {
           x: w => (w - 648) / 2,
           rect: true,
           color: 0xdd333333,
-          shader: { type: Lightning.shaders.RoundedRectangle, radius: 10 },
+          shader: { type: lng.shaders.RoundedRectangle, radius: 10 },
           Info: {
             y: 24,
             x: 48,
@@ -5967,13 +5967,10 @@ var APP_com_metrological_app_newapp = (function () {
     },
   };
 
-  /*
-   * If not stated otherwise in this file or this component's LICENSE file the
-   * following copyright and licenses apply:
+  /**
+   * Copyright 2020 Comcast Cable Communications Management, LLC
    *
-   * Copyright 2020 Metrological
-   *
-   * Licensed under the Apache License, Version 2.0 (the License);
+   * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
    * You may obtain a copy of the License at
    *
@@ -5984,57 +5981,649 @@ var APP_com_metrological_app_newapp = (function () {
    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    * See the License for the specific language governing permissions and
    * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
    */
 
-  class App extends Lightning.Component {
-    static getFonts() {
-      return [{ family: 'Regular', url: Utils.asset('fonts/Roboto-Regular.ttf') }]
+  /**
+   * Naively looks for dimensional prop (i.e. w, h, x, y, etc.), first searching for
+   * a transition target value then defaulting to the current set value
+   * @param {string} prop - property key
+   * @param {lng.Component} component - Lightning component to operate against
+   */
+  function getDimension(prop, component) {
+    if (!component) return 0;
+    const transition = component.transition(prop);
+    if (transition.isRunning()) return transition.targetValue;
+    return component[prop];
+  }
+
+  const getX = getDimension.bind(null, 'x');
+  getDimension.bind(null, 'y');
+  const getH = component =>
+    getDimension('h', component) || component.renderHeight;
+
+  /**
+   * Returns a function, that, as long as it continues to be invoked, will not
+   * be triggered. The function will be called after it stops being called for
+   * N milliseconds. If `immediate` is passed, trigger the function on the
+   * leading edge, instead of the trailing. The function also has a property 'clear' 
+   * that is a function which will clear the timer to prevent previously scheduled executions. 
+   *
+   * @source underscore.js
+   * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+   * @param {Function} function to wrap
+   * @param {Number} timeout in ms (`100`)
+   * @param {Boolean} whether to execute at the beginning (`false`)
+   * @api public
+   */
+  function debounce(func, wait, immediate){
+    var timeout, args, context, timestamp, result;
+    if (null == wait) wait = 100;
+
+    function later() {
+      var last = Date.now() - timestamp;
+
+      if (last < wait && last >= 0) {
+        timeout = setTimeout(later, wait - last);
+      } else {
+        timeout = null;
+        if (!immediate) {
+          result = func.apply(context, args);
+          context = args = null;
+        }
+      }
+    }
+    var debounced = function(){
+      context = this;
+      args = arguments;
+      timestamp = Date.now();
+      var callNow = immediate && !timeout;
+      if (!timeout) timeout = setTimeout(later, wait);
+      if (callNow) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+
+      return result;
+    };
+
+    debounced.clear = function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+    };
+    
+    debounced.flush = function() {
+      if (timeout) {
+        result = func.apply(context, args);
+        context = args = null;
+        
+        clearTimeout(timeout);
+        timeout = null;
+      }
+    };
+
+    return debounced;
+  }
+  // Adds compatibility for ES modules
+  debounce.debounce = debounce;
+
+  var debounce_1 = debounce;
+
+  /**
+   * Copyright 2020 Comcast Cable Communications Management, LLC
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
+   */
+
+  class Icon extends lng.Component {
+    static _template() {
+      return {
+        color: 0xffffffff,
+        w: 0,
+        h: 0
+      };
     }
 
+    get icon() {
+      return this._icon;
+    }
+
+    set icon(icon) {
+      this._icon = icon;
+      this._update();
+    }
+
+    _init() {
+      this._update();
+    }
+
+    _update() {
+      const { icon, w, h } = this;
+      const template = getIconTemplate(icon, w, h);
+      this.patch(template);
+    }
+  }
+
+  const [isSvgTag, isSvgURI, isImageURI] = [
+    /^<svg.*<\/svg\>$/,
+    /\.svg$/,
+    /\.(a?png|bmp|gif|ico|cur|jpe?g|pjp(eg)?|jfif|tiff?|webp)$/
+  ].map(regex => RegExp.prototype.test.bind(regex));
+
+  function getIconTemplate(icon, w, h) {
+    const template = { w, h };
+
+    switch (true) {
+      case isSvgTag(icon):
+        template.texture = lng.Tools.getSvgTexture(
+          `data:image/svg+xml,${encodeURIComponent(icon)}`,
+          w,
+          h
+        );
+        break;
+      case isSvgURI(icon):
+        template.texture = lng.Tools.getSvgTexture(icon, w, h);
+        break;
+      case isImageURI(icon):
+        template.src = icon;
+        break;
+    }
+    return template;
+  }
+
+  /**
+   * Copyright 2020 Comcast Cable Communications Management, LLC
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
+   */
+
+  class FocusManager extends lng.Component {
+    constructor(stage) {
+      super(stage);
+      this.patch({ Items: {} });
+      this._direction = this.direction || 'row';
+    }
+
+    _construct() {
+      this._selectedIndex = 0;
+    }
+
+    get direction() {
+      return this._direction;
+    }
+
+    set direction(direction) {
+      this._direction = direction;
+      let state = {
+        none: 'None',
+        column: 'Column',
+        row: 'Row'
+      }[direction];
+
+      if (state) {
+        this._setState(state);
+      }
+    }
+
+    get Items() {
+      return this.tag('Items');
+    }
+
+    get items() {
+      return this.Items.children;
+    }
+
+    set items(items) {
+      this.Items.childList.clear();
+      this._selectedIndex = 0;
+      this.appendItems(items);
+    }
+
+    appendItems(items = []) {
+      this.Items.childList.a(items);
+      this._refocus();
+    }
+
+    get selected() {
+      return this.Items.children[this.selectedIndex];
+    }
+
+    get selectedIndex() {
+      return this._selectedIndex;
+    }
+
+    set selectedIndex(index) {
+      const prevSelected = this.selected;
+      if (index !== this._selectedIndex) {
+        this._selectedIndex = index;
+      }
+      // Have items update (change height or width) before we render
+      this._refocus();
+      if (this.selected) {
+        this.render(this.selected, prevSelected);
+        this.signal('selectedChange', this.selected, prevSelected);
+      }
+    }
+
+    // Override
+    render() {}
+
+    selectPrevious() {
+      if (this.selectedIndex > 0) {
+        let prevIndex = this.selectedIndex - 1;
+        let previous = this.items[prevIndex];
+        while (prevIndex && previous.skipFocus) {
+          this._selectedIndex = prevIndex;
+          this.render(previous, this.items[prevIndex + 1]);
+          prevIndex -= 1;
+          previous = this.items[prevIndex];
+        }
+        this.selectedIndex = prevIndex;
+        return true;
+      } else if (this.wrapSelected) {
+        this.selectedIndex = this.Items.children.length - 1;
+        return true;
+      }
+      return false;
+    }
+
+    selectNext() {
+      if (this.selectedIndex < this.Items.children.length - 1) {
+        let nextIndex = this.selectedIndex + 1;
+        let next = this.items[nextIndex];
+        while (nextIndex < this.items.length - 1 && next.skipFocus) {
+          this._selectedIndex = nextIndex;
+          this.render(next, this.items[nextIndex - 1]);
+          nextIndex += 1;
+          next = this.items[nextIndex];
+        }
+        this.selectedIndex = nextIndex;
+        return true;
+      } else if (this.wrapSelected) {
+        this.selectedIndex = 0;
+        return true;
+      }
+      return false;
+    }
+
+    _getFocused() {
+      let { selected } = this;
+      // Make sure we're focused on a component
+      if (selected) {
+        if (selected.focusRef) {
+          return selected.tag(selected.focusRef);
+        } else if (selected.cparent) {
+          return selected;
+        }
+      }
+      return this;
+    }
+
+    static _states() {
+      return [
+        class None extends this {},
+        class Row extends this {
+          _handleLeft() {
+            return this.selectPrevious();
+          }
+
+          _handleRight() {
+            return this.selectNext();
+          }
+        },
+
+        class Column extends this {
+          _handleUp() {
+            return this.selectPrevious();
+          }
+
+          _handleDown() {
+            return this.selectNext();
+          }
+        }
+      ];
+    }
+  }
+
+  /**
+   * Copyright 2020 Comcast Cable Communications Management, LLC
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
+   */
+  class Row extends FocusManager {
+    static _template() {
+      return {
+        direction: 'row'
+      };
+    }
+
+    _construct() {
+      super._construct();
+      this._smooth = false;
+      this._itemSpacing = 0;
+      this._scrollIndex = 0;
+      this._whenEnabled = new Promise(resolve => (this._firstEnable = resolve));
+      this._w = this.stage.w;
+      this.debounceDelay = Number.isInteger(this.debounceDelay)
+        ? this.debounceDelay
+        : 1;
+      this._update = debounce_1.debounce(this._updateLayout, this.debounceDelay);
+    }
+
+    get _itemTransition() {
+      return (
+        this.itemTransition || {
+          duration: 0.4,
+          timingFunction: 'cubic-bezier(0.20, 1.00, 0.30, 1.00)'
+        }
+      );
+    }
+
+    _focus() {
+      this.items.forEach(item => (item.parentFocus = true));
+    }
+
+    _unfocus() {
+      this.items.forEach(item => (item.parentFocus = false));
+    }
+
+    selectNext() {
+      this._smooth = true;
+      return super.selectNext();
+    }
+
+    selectPrevious() {
+      this._smooth = true;
+      return super.selectPrevious();
+    }
+
+    // TODO: can be documented in API when lastScrollIndex is made public
+    shouldScrollLeft() {
+      let shouldScroll = false;
+
+      if (this._lastScrollIndex) {
+        shouldScroll = this.selectedIndex < this._lastScrollIndex;
+        if (
+          this._prevLastScrollIndex !== undefined &&
+          this._prevLastScrollIndex !== this._lastScrollIndex
+        ) {
+          shouldScroll = true;
+        }
+      } else {
+        shouldScroll = this.selectedIndex >= this._scrollIndex;
+      }
+
+      return this._itemsX < 0 && shouldScroll;
+    }
+
+    // TODO: can be documented in API when lastScrollIndex is made public
+    shouldScrollRight() {
+      const lastChild = this.Items.childList.last;
+      return (
+        this.selectedIndex > this._scrollIndex &&
+        // end of Items container < end of last item
+        Math.abs(this._itemsX - this.w) <
+          lastChild.x + this.Items.childList.last.w
+      );
+    }
+
+    get onScreenItems() {
+      return this.Items.children.filter(child => this._isOnScreen(child));
+    }
+
+    _isOnScreen(child) {
+      const x = getX(child);
+      const { w } = child;
+      const withinLowerBounds = x + w + this._itemsX > 0;
+      const withinUpperBounds = x + this._itemsX < this.w;
+      return withinLowerBounds && withinUpperBounds;
+    }
+
+    _isOnScreenCompletely(child) {
+      let itemX = child.core.renderContext.px;
+      let rowX = this.core.renderContext.px;
+      return itemX >= rowX && itemX + child.w <= rowX + this.w;
+    }
+
+    _shouldScroll() {
+      const lastChild = this.Items.childList.last;
+      let shouldScroll = this.alwaysScroll;
+      if (!shouldScroll) {
+        if (this.lazyScroll) {
+          shouldScroll = !this._isOnScreenCompletely(this.selected);
+        } else {
+          shouldScroll =
+            lastChild &&
+            (this.shouldScrollLeft() ||
+              this.shouldScrollRight() ||
+              !this._isOnScreenCompletely(this.selected));
+        }
+      }
+      return shouldScroll;
+    }
+
+    _getLazyScrollX(prev) {
+      let itemsContainerX;
+      const prevIndex = this.Items.childList.getIndex(prev);
+      if (prevIndex > this.selectedIndex) {
+        itemsContainerX = -this.selected.x;
+      } else if (prevIndex < this.selectedIndex) {
+        itemsContainerX = this.w - this.selected.x - this.selected.w;
+      }
+      return itemsContainerX;
+    }
+
+    _getScrollX() {
+      let itemsContainerX;
+      let itemIndex = this.selectedIndex - this.scrollIndex;
+      itemIndex = itemIndex < 0 ? 0 : itemIndex;
+      if (this.Items.children[itemIndex]) {
+        itemsContainerX = this.Items.children[itemIndex].transition('x')
+          ? -this.Items.children[itemIndex].transition('x').targetValue
+          : -this.Items.children[itemIndex].x;
+      }
+      return itemsContainerX;
+    }
+
+    render(next, prev) {
+      this._whenEnabled.then(() => {
+        this._prevLastScrollIndex = this._lastScrollIndex;
+
+        if (this._shouldScroll()) {
+          const itemsContainerX =
+            this.lazyScroll && prev
+              ? this._getLazyScrollX(prev)
+              : this._getScrollX();
+          if (itemsContainerX !== undefined) {
+            if (this._smooth) {
+              this.Items.smooth = {
+                x: [itemsContainerX, this._itemTransition]
+              };
+            } else {
+              this.Items.x = itemsContainerX;
+            }
+          }
+        }
+
+        this.onScreenEffect(this.onScreenItems);
+      });
+    }
+
+    _updateLayout() {
+      let nextX = 0;
+      let nextH = 0;
+      // layout items in row
+      for (let i = 0; i < this.Items.children.length; i++) {
+        const child = this.Items.children[i];
+        nextH = Math.max(nextH, getH(child));
+        if (this._smooth) {
+          child.smooth = { x: [nextX, this._itemTransition] };
+        } else {
+          child.patch({ x: nextX });
+        }
+        nextX += child.w;
+        if (i < this.Items.children.length - 1) {
+          nextX += this.itemSpacing;
+        }
+
+        if (child.centerInParent) {
+          // if the child is another focus manager, check the height of the item container
+          const childHeight = (child.Items && child.Items.h) || child.h;
+          // only center the child if it is within the bounds of this focus manager
+          if (childHeight < this.h) {
+            child.y = (this.h - childHeight) / 2;
+          }
+        }
+      }
+      this.Items.patch({ h: nextH, w: nextX });
+
+      const lastChild = this.Items.childList.last;
+      const endOfLastChild = lastChild ? getX(lastChild) + lastChild.w : 0;
+      const scrollOffset = (this.Items.children[this._scrollIndex] || { x: 0 }).x;
+
+      // determine when to stop scrolling right
+      if (this.alwaysScroll) {
+        this._lastScrollIndex = this.Items.children.length - 1;
+      } else if (endOfLastChild > this.w) {
+        for (let i = this.Items.children.length - 1; i >= 0; i--) {
+          const child = this.Items.children[i];
+          const childX = getX(child);
+          if (childX + this.w - scrollOffset > endOfLastChild) {
+            this._lastScrollIndex = i;
+          } else {
+            break;
+          }
+        }
+      }
+      this.fireAncestors('$itemChanged');
+      this.render(this.selected, null);
+    }
+
+    get itemSpacing() {
+      return this._itemSpacing;
+    }
+
+    set itemSpacing(itemSpacing) {
+      if (itemSpacing !== this._itemSpacing) {
+        this._itemSpacing = itemSpacing;
+        this._update();
+      }
+    }
+
+    get scrollIndex() {
+      return this._scrollIndex;
+    }
+
+    set scrollIndex(scrollIndex) {
+      if (scrollIndex !== this._scrollIndex) {
+        this._scrollIndex = scrollIndex;
+        this._update();
+      }
+    }
+
+    get _itemsX() {
+      return getX(this.Items);
+    }
+
+    appendItems(items = []) {
+      let itemHeight = this.renderHeight;
+
+      items.forEach(item => {
+        item.parentFocus = this.hasFocus();
+        item = this.Items.childList.a(item);
+        item.h = item.h || itemHeight;
+      });
+      this.stage.update();
+      this._updateLayout();
+      this._update.clear();
+      this._refocus();
+    }
+
+    $itemChanged() {
+      this._update();
+    }
+
+    // can be overridden
+    onScreenEffect() {}
+  }
+
+  class App extends lng.Component {
     static _template() {
       return {
         Background: {
           w: 1920,
           h: 1080,
-          color: 0xfffbb03b,
-          src: Utils.asset('images/background.png'),
-        },
-        Logo: {
-          mountX: 0.5,
-          mountY: 1,
-          x: 960,
-          y: 600,
-          src: Utils.asset('images/logo.png'),
+          color: 0x0a0a0a0a,
+          src: Utils.asset('images/logo_now.png'),
         },
         Text: {
           mount: 0.5,
-          x: 960,
-          y: 720,
+          x: 500,
+          y: 400,
           text: {
-            text: "Let's start Building!",
+            text: 'Film title',
             fontFace: 'Regular',
             fontSize: 64,
-            textColor: 0xbbffffff,
+            textColor: 0x44444444,
           },
+        },
+        Row: {
+          type: Row,
+          x: 10,
+          y: 30,
+          w: 160,
+          itemSpacing: 10,
+          scrollIndex: 3,
+          items: Array.apply(null, { length: 12 }).map((_, i) => ({
+            type: Icon,
+            w: 150,
+            h: 250,
+            icon: 'static/images/film_luca.jpg',
+          })),
         },
       }
     }
 
-    _init() {
-      this.tag('Background')
-        .animation({
-          duration: 15,
-          repeat: -1,
-          actions: [
-            {
-              t: '',
-              p: 'color',
-              v: { 0: { v: 0xfffbb03b }, 0.5: { v: 0xfff46730 }, 0.8: { v: 0xfffbb03b } },
-            },
-          ],
-        })
-        .start();
-    }
+    _init() {}
   }
 
   function index() {

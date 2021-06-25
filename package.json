@@ -2,7 +2,8 @@
   "name": "com.metrological.app.newapp",
   "description": "NewApp",
   "dependencies": {
-    "@lightningjs/sdk": "^4.4.0"
+    "@lightningjs/sdk": "^4.4.0",
+    "@lightningjs/ui-components": "^1.0.0"
   },
   "lint-staged": {
     "*.js": [
