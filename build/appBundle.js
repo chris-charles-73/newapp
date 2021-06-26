@@ -3,7 +3,7 @@
  * SDK version: 4.4.0
  * CLI version: 2.5.0
  * 
- * Generated: Fri, 25 Jun 2021 15:21:05 GMT
+ * Generated: Sat, 26 Jun 2021 20:01:53 GMT
  */
 
 var APP_com_metrological_app_newapp = (function () {
@@ -7154,21 +7154,9 @@ var APP_com_metrological_app_newapp = (function () {
             textColor: 0xff00ffff,
           },
         },
-        TextUpArrow: {
-          x: 853,
-          y: 430,
-          text: {
-            text: '^',
-            fontFace: 'Segoe Print, Arial',
-            fontSize: 120,
-            fontWeight: 'bold',
-            textAlign: 'center',
-            textColor: 0x77777777,
-          },
-        },
         TextDescription: {
           x: 355,
-          y: 530,
+          y: 490,
           text: {
             text:
               "In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan's attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces.",
@@ -7184,26 +7172,45 @@ var APP_com_metrological_app_newapp = (function () {
           type: Row,
           x: 10,
           y: 200,
-          width: 1000,
-          height: 250,
-          itemSpacing: 10,
+          h: 250,
+          itemSpacing: 30,
           scrollIndex: 0,
           items: Array.apply(null, { length: 16 }).map((_, i) => ({
             type: Button$1,
-            type: Icon,
             w: 150,
             h: 250,
-            src: `static/images/film_${i}.jpg`,
+            icon: {
+              type: Icon,
+              src: '',
+              size: 250,
+              color: 0xffffffff,
+              spacing: 0,
+            },
           })),
         },
       }
     }
 
+    _renderLatestUpdate() {
+      const row = this.tag('RowOfFilmImages');
+      row.items.forEach((item, index) => {
+        const icon = item.children[0];
+        icon.src = `static/images/film_${index}.jpg`;
+        icon.h = 250;
+        icon.w = 150;
+      });
+      row.selected['children'][0].alpha = 0.3;
+    }
+
     _getFocused() {
+      this._renderLatestUpdate();
       return this.tag('RowOfFilmImages')
     }
 
-    _init() {}
+    _init() {
+      this.tag('RowOfFilmImages').selectedIndex = 0;
+      this._renderLatestUpdate();
+    }
   }
 
   function index() {
