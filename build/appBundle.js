@@ -3,7 +3,7 @@
  * SDK version: 4.4.0
  * CLI version: 2.5.0
  * 
- * Generated: Sun, 27 Jun 2021 12:22:00 GMT
+ * Generated: Sun, 27 Jun 2021 12:39:18 GMT
  */
 
 var APP_com_metrological_app_newapp = (function () {
@@ -7274,17 +7274,17 @@ var APP_com_metrological_app_newapp = (function () {
           type: Row,
           x: 960 - 90,
           y: 200,
-          h: 250,
+          h: 225,
           itemSpacing: 30,
           scrollIndex: 0,
           items: Array.apply(null, { length: films.length }).map((_, i) => ({
             type: Button$1,
             w: 150,
-            h: 250,
+            h: 225,
             icon: {
               type: Icon,
               src: '',
-              size: 250,
+              size: 225,
               color: 0xffffffff,
               spacing: 0,
             },
@@ -7296,28 +7296,23 @@ var APP_com_metrological_app_newapp = (function () {
     renderLatestUpdate() {
       const row = this.tag('RowOfFilmImages');
       const selectedIndex = row.selectedIndex;
-      this.resetRowFilmProperties(row);
-      this.setXPosition(row, selectedIndex);
+      this.resetFilmIconOpacities(row);
+      this.setRowsXPosition(row, selectedIndex);
       this.updateTexts(selectedIndex);
     }
 
     updateTexts(selectedIndex) {
-      this.tag('TextTitle').text.text = films[selectedIndex].title;
-      this.tag('TextOverview').text.text = films[selectedIndex].overview;
+      const selectedFilm = films[selectedIndex];
+      this.tag('TextTitle').text.text = selectedFilm.title;
+      this.tag('TextOverview').text.text = selectedFilm.overview;
     }
 
-    resetRowFilmProperties(row) {
-      row.items.forEach((item, index) => {
-        const icon = item.children[0];
-        icon.src = films[index].poster_path;
-        icon.h = 250;
-        icon.w = 150;
-        icon.alpha = 0.4;
-      });
+    resetFilmIconOpacities(row) {
+      row.items.forEach(item => (item.children[0].alpha = 0.4));
       row.selected['children'][0].alpha = 1;
     }
 
-    setXPosition(row, selectedIndex) {
+    setRowsXPosition(row, selectedIndex) {
       const filmWidth = 180;
       const halfOfFilmsLength = films.length / 2;
       const filmsToOffset = halfOfFilmsLength - selectedIndex;
@@ -7329,13 +7324,24 @@ var APP_com_metrological_app_newapp = (function () {
       row.x = xOfCentreFilm - offsetAmount;
     }
 
+    setUpFilmIconProperties() {
+      const row = this.tag('RowOfFilmImages');
+      row.items.forEach((item, index) => {
+        const icon = item.children[0];
+        icon.src = films[index].poster_path;
+        icon.h = 225;
+        icon.w = 150;
+      });
+    }
+
     _getFocused() {
       this.renderLatestUpdate();
       return this.tag('RowOfFilmImages')
     }
 
     _init() {
-      this.tag('RowOfFilmImages').selectedIndex = 8;
+      this.tag('RowOfFilmImages').selectedIndex = films.length / 2;
+      this.setUpFilmIconProperties();
       this.renderLatestUpdate();
     }
   }
