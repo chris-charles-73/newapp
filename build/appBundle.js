@@ -3,7 +3,7 @@
  * SDK version: 4.4.0
  * CLI version: 2.5.0
  * 
- * Generated: Sat, 26 Jun 2021 20:01:53 GMT
+ * Generated: Sun, 27 Jun 2021 09:55:33 GMT
  */
 
 var APP_com_metrological_app_newapp = (function () {
@@ -7126,6 +7126,109 @@ var APP_com_metrological_app_newapp = (function () {
     onScreenEffect() {}
   }
 
+  var films = [
+  	{
+  		title: "Thor: Ragnarok",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg",
+  		overview: "Thor is imprisoned on the other side of the universe and finds himself in a race against time to get back to Asgard to stop Ragnarok, the destruction of his home-world and the end of Asgardian civilization, at the hands of a powerful new threat, the ruthless Hela."
+  	},
+  	{
+  		title: "Spider-Man: Homecoming",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg",
+  		overview: "Following the events of Captain America: Civil War, Peter Parker, with the help of his mentor Tony Stark, tries to balance his life as an ordinary high school student in Queens, New York City, with fighting crime as his superhero alter ego Spider-Man as a new threat, the Vulture, emerges."
+  	},
+  	{
+  		title: "Guardians of the Galaxy Vol. 2",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/tM894AtE7UQTJEoQG6qF6mdfSUT.jpg",
+  		overview: "The Guardians must fight to keep their newfound family together as they unravel the mysteries of Peter Quill's true parentage."
+  	},
+  	{
+  		title: "Logan",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg",
+  		overview: "In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan's attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces."
+  	},
+  	{
+  		title: "Doctor Strange",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/aL53oMdZKZRJRH8txH07DLuleF9.jpg",
+  		overview: "After his career is destroyed, a brilliant but arrogant surgeon gets a new lease on life when a sorcerer takes him under her wing and trains him to defend the world against evil."
+  	},
+  	{
+  		title: "X-Men: Apocalypse",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/2ex2beZ4ssMeOduLD0ILzXKCiep.jpg",
+  		overview: "After the re-emergence of the world's first mutant, world-destroyer Apocalypse, the X-Men must unite to defeat his extinction level plan."
+  	},
+  	{
+  		title: "Captain America: Civil War",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/kvRT3GwcnqGHzPjXIVrVPhUix7Z.jpg",
+  		overview: "Following the events of Age of Ultron, the collective governments of the world pass an act designed to regulate all superhuman activity. This polarizes opinion amongst the Avengers, causing two factions to side with Iron Man or Captain America, which causes an epic battle between former allies."
+  	},
+  	{
+  		title: "Deadpool",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/en971MEXui9diirXlogOrPKmsEn.jpg",
+  		overview: "Deadpool tells the origin story of former Special Forces operative turned mercenary Wade Wilson, who after being subjected to a rogue experiment that leaves him with accelerated healing powers, adopts the alter ego Deadpool. Armed with his new abilities and a dark, twisted sense of humor, Deadpool hunts down the man who nearly destroyed his life."
+  	},
+  	{
+  		title: "Fantastic Four",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/gzhVcfC5j0sTnS4WJzBrCS0Vkr0.jpg",
+  		overview: "Four young outsiders teleport to a dangerous universe, which alters their physical form in shocking ways. Their lives irrevocably upended, the team must learn to harness their daunting new abilities and work together to save Earth from a former friend turned enemy."
+  	},
+  	{
+  		title: "Ant-Man",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/7AyEEZVtFjNMCOEoz88pBqiAI8n.jpg",
+  		overview: "Armed with the astonishing ability to shrink in scale but increase in strength, master thief Scott Lang must embrace his inner-hero and help his mentor, Doctor Hank Pym, protect the secret behind his spectacular Ant-Man suit from a new generation of towering threats. Against seemingly insurmountable obstacles, Pym and Lang must plan and pull off a heist that will save the world."
+  	},
+  	{
+  		title: "Thor: Ragnarok",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg",
+  		overview: "Thor is imprisoned on the other side of the universe and finds himself in a race against time to get back to Asgard to stop Ragnarok, the destruction of his home-world and the end of Asgardian civilization, at the hands of a powerful new threat, the ruthless Hela."
+  	},
+  	{
+  		title: "Spider-Man: Homecoming",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg",
+  		overview: "Following the events of Captain America: Civil War, Peter Parker, with the help of his mentor Tony Stark, tries to balance his life as an ordinary high school student in Queens, New York City, with fighting crime as his superhero alter ego Spider-Man as a new threat, the Vulture, emerges."
+  	},
+  	{
+  		title: "Guardians of the Galaxy Vol. 2",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/tM894AtE7UQTJEoQG6qF6mdfSUT.jpg",
+  		overview: "The Guardians must fight to keep their newfound family together as they unravel the mysteries of Peter Quill's true parentage."
+  	},
+  	{
+  		title: "Logan",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg",
+  		overview: "In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan's attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces."
+  	},
+  	{
+  		title: "Doctor Strange",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/aL53oMdZKZRJRH8txH07DLuleF9.jpg",
+  		overview: "After his career is destroyed, a brilliant but arrogant surgeon gets a new lease on life when a sorcerer takes him under her wing and trains him to defend the world against evil."
+  	},
+  	{
+  		title: "X-Men: Apocalypse",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/2ex2beZ4ssMeOduLD0ILzXKCiep.jpg",
+  		overview: "After the re-emergence of the world's first mutant, world-destroyer Apocalypse, the X-Men must unite to defeat his extinction level plan."
+  	},
+  	{
+  		title: "Captain America: Civil War",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/kvRT3GwcnqGHzPjXIVrVPhUix7Z.jpg",
+  		overview: "Following the events of Age of Ultron, the collective governments of the world pass an act designed to regulate all superhuman activity. This polarizes opinion amongst the Avengers, causing two factions to side with Iron Man or Captain America, which causes an epic battle between former allies."
+  	},
+  	{
+  		title: "Deadpool",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/en971MEXui9diirXlogOrPKmsEn.jpg",
+  		overview: "Deadpool tells the origin story of former Special Forces operative turned mercenary Wade Wilson, who after being subjected to a rogue experiment that leaves him with accelerated healing powers, adopts the alter ego Deadpool. Armed with his new abilities and a dark, twisted sense of humor, Deadpool hunts down the man who nearly destroyed his life."
+  	},
+  	{
+  		title: "Fantastic Four",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/gzhVcfC5j0sTnS4WJzBrCS0Vkr0.jpg",
+  		overview: "Four young outsiders teleport to a dangerous universe, which alters their physical form in shocking ways. Their lives irrevocably upended, the team must learn to harness their daunting new abilities and work together to save Earth from a former friend turned enemy."
+  	},
+  	{
+  		title: "Ant-Man",
+  		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/7AyEEZVtFjNMCOEoz88pBqiAI8n.jpg",
+  		overview: "Armed with the astonishing ability to shrink in scale but increase in strength, master thief Scott Lang must embrace his inner-hero and help his mentor, Doctor Hank Pym, protect the secret behind his spectacular Ant-Man suit from a new generation of towering threats. Against seemingly insurmountable obstacles, Pym and Lang must plan and pull off a heist that will save the world."
+  	}
+  ];
+
   class App extends lng.Component {
     static _template() {
       return {
@@ -7144,22 +7247,22 @@ var APP_com_metrological_app_newapp = (function () {
           src: Utils.asset('images/logo_now.png'),
         },
         TextTitle: {
-          x: 785,
+          x: 0,
           y: 90,
+          w: 1920,
           text: {
-            text: 'Logan',
+            text: films[0].title,
             fontFace: 'Segoe Print, Arial',
             fontSize: 64,
             textAlign: 'center',
             textColor: 0xff00ffff,
           },
         },
-        TextDescription: {
+        TextOverview: {
           x: 355,
           y: 490,
           text: {
-            text:
-              "In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan's attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces.",
+            text: films[0].overview,
             fontFace: 'Segoe Print, Arial',
             fontSize: 28,
             wordWrapWidth: 1100,
@@ -7175,7 +7278,7 @@ var APP_com_metrological_app_newapp = (function () {
           h: 250,
           itemSpacing: 30,
           scrollIndex: 0,
-          items: Array.apply(null, { length: 16 }).map((_, i) => ({
+          items: Array.apply(null, { length: films.length }).map((_, i) => ({
             type: Button$1,
             w: 150,
             h: 250,
@@ -7195,11 +7298,14 @@ var APP_com_metrological_app_newapp = (function () {
       const row = this.tag('RowOfFilmImages');
       row.items.forEach((item, index) => {
         const icon = item.children[0];
-        icon.src = `static/images/film_${index}.jpg`;
+        icon.src = films[index].poster_path;
         icon.h = 250;
         icon.w = 150;
+        icon.alpha = 1;
       });
       row.selected['children'][0].alpha = 0.3;
+      this.tag('TextTitle').text.text = films[row.selectedIndex].title;
+      this.tag('TextOverview').text.text = films[row.selectedIndex].overview;
     }
 
     _getFocused() {

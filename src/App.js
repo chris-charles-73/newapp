@@ -1,5 +1,6 @@
 import { Lightning, Utils } from '@lightningjs/sdk'
 import { Row, Icon, Button } from '@lightningjs/ui-components'
+import { films } from '../static/films.json'
 
 export default class App extends Lightning.Component {
   static _template() {
@@ -19,22 +20,22 @@ export default class App extends Lightning.Component {
         src: Utils.asset('images/logo_now.png'),
       },
       TextTitle: {
-        x: 785,
+        x: 0,
         y: 90,
+        w: 1920,
         text: {
-          text: 'Logan',
+          text: films[0].title,
           fontFace: 'Segoe Print, Arial',
           fontSize: 64,
           textAlign: 'center',
           textColor: 0xff00ffff,
         },
       },
-      TextDescription: {
+      TextOverview: {
         x: 355,
         y: 490,
         text: {
-          text:
-            "In the near future, a weary Logan cares for an ailing Professor X in a hideout on the Mexican border. But Logan's attempts to hide from the world and his legacy are upended when a young mutant arrives, pursued by dark forces.",
+          text: films[0].overview,
           fontFace: 'Segoe Print, Arial',
           fontSize: 28,
           wordWrapWidth: 1100,
@@ -50,7 +51,7 @@ export default class App extends Lightning.Component {
         h: 250,
         itemSpacing: 30,
         scrollIndex: 0,
-        items: Array.apply(null, { length: 16 }).map((_, i) => ({
+        items: Array.apply(null, { length: films.length }).map((_, i) => ({
           type: Button,
           w: 150,
           h: 250,
@@ -70,11 +71,14 @@ export default class App extends Lightning.Component {
     const row = this.tag('RowOfFilmImages')
     row.items.forEach((item, index) => {
       const icon = item.children[0]
-      icon.src = `static/images/film_${index}.jpg`
+      icon.src = films[index].poster_path
       icon.h = 250
       icon.w = 150
+      icon.alpha = 1
     })
     row.selected['children'][0].alpha = 0.3
+    this.tag('TextTitle').text.text = films[row.selectedIndex].title
+    this.tag('TextOverview').text.text = films[row.selectedIndex].overview
   }
 
   _getFocused() {
