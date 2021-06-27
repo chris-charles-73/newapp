@@ -3,7 +3,7 @@
  * SDK version: 4.4.0
  * CLI version: 2.5.0
  * 
- * Generated: Sun, 27 Jun 2021 09:55:33 GMT
+ * Generated: Sun, 27 Jun 2021 12:22:00 GMT
  */
 
 var APP_com_metrological_app_newapp = (function () {
@@ -7234,14 +7234,12 @@ var APP_com_metrological_app_newapp = (function () {
       return {
         Background: {
           w: 1920,
-          h: 1080,
-          type: Icon,
-          color: 0xffffffff,
+          h: 980,
           src: Utils.asset('images/background.png'),
         },
         BackgroundImage: {
           w: 1920,
-          h: 1080,
+          h: 980,
           type: Icon,
           color: 0xaaaaaaaa,
           src: Utils.asset('images/logo_now.png'),
@@ -7259,8 +7257,9 @@ var APP_com_metrological_app_newapp = (function () {
           },
         },
         TextOverview: {
-          x: 355,
+          x: 0,
           y: 490,
+          w: 1920,
           text: {
             text: films[0].overview,
             fontFace: 'Segoe Print, Arial',
@@ -7273,7 +7272,7 @@ var APP_com_metrological_app_newapp = (function () {
         },
         RowOfFilmImages: {
           type: Row,
-          x: 10,
+          x: 960 - 90,
           y: 200,
           h: 250,
           itemSpacing: 30,
@@ -7294,28 +7293,50 @@ var APP_com_metrological_app_newapp = (function () {
       }
     }
 
-    _renderLatestUpdate() {
+    renderLatestUpdate() {
       const row = this.tag('RowOfFilmImages');
+      const selectedIndex = row.selectedIndex;
+      this.resetRowFilmProperties(row);
+      this.setXPosition(row, selectedIndex);
+      this.updateTexts(selectedIndex);
+    }
+
+    updateTexts(selectedIndex) {
+      this.tag('TextTitle').text.text = films[selectedIndex].title;
+      this.tag('TextOverview').text.text = films[selectedIndex].overview;
+    }
+
+    resetRowFilmProperties(row) {
       row.items.forEach((item, index) => {
         const icon = item.children[0];
         icon.src = films[index].poster_path;
         icon.h = 250;
         icon.w = 150;
-        icon.alpha = 1;
+        icon.alpha = 0.4;
       });
-      row.selected['children'][0].alpha = 0.3;
-      this.tag('TextTitle').text.text = films[row.selectedIndex].title;
-      this.tag('TextOverview').text.text = films[row.selectedIndex].overview;
+      row.selected['children'][0].alpha = 1;
+    }
+
+    setXPosition(row, selectedIndex) {
+      const filmWidth = 180;
+      const halfOfFilmsLength = films.length / 2;
+      const filmsToOffset = halfOfFilmsLength - selectedIndex;
+      let xOfCentreFilm = 960 - 90;
+      let offsetAmount = 0;
+      if (filmsToOffset < 0) {
+        offsetAmount = filmWidth * filmsToOffset * -1;
+      }
+      row.x = xOfCentreFilm - offsetAmount;
     }
 
     _getFocused() {
-      this._renderLatestUpdate();
+      this.renderLatestUpdate();
       return this.tag('RowOfFilmImages')
     }
 
     _init() {
-      this.tag('RowOfFilmImages').selectedIndex = 0;
-      this._renderLatestUpdate();
+      this.tag('RowOfFilmImages').selectedIndex = 8;
+      this.renderLatestUpdate();
     }
   }
 

@@ -2,7 +2,7 @@
   "appSettings": {
     "stage": {
       "useImageWorker": true,
-      "h": 959,
+      "h": 969,
       "w": 1920
     },
     "debug": false
