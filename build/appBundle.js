@@ -3,7 +3,7 @@
  * SDK version: 4.4.0
  * CLI version: 2.5.0
  * 
- * Generated: Sun, 27 Jun 2021 12:39:18 GMT
+ * Generated: Mon, 28 Jun 2021 07:19:05 GMT
  */
 
 var APP_com_metrological_app_newapp = (function () {
@@ -7229,9 +7229,11 @@ var APP_com_metrological_app_newapp = (function () {
   	}
   ];
 
+  //import { fallbackCachedFilms } from '../static/films.json'
+
   class App extends lng.Component {
     static _template() {
-      return {
+      return { 
         Background: {
           w: 1920,
           h: 980,
@@ -7271,7 +7273,7 @@ var APP_com_metrological_app_newapp = (function () {
           },
         },
         RowOfFilmImages: {
-          type: Row,
+          type: Row, 
           x: 960 - 90,
           y: 200,
           h: 225,
@@ -7293,7 +7295,7 @@ var APP_com_metrological_app_newapp = (function () {
       }
     }
 
-    renderLatestUpdate() {
+    renderLatestUpdate = () => {
       const row = this.tag('RowOfFilmImages');
       const selectedIndex = row.selectedIndex;
       this.resetFilmIconOpacities(row);
@@ -7301,18 +7303,18 @@ var APP_com_metrological_app_newapp = (function () {
       this.updateTexts(selectedIndex);
     }
 
-    updateTexts(selectedIndex) {
+    updateTexts = (selectedIndex) => {
       const selectedFilm = films[selectedIndex];
       this.tag('TextTitle').text.text = selectedFilm.title;
       this.tag('TextOverview').text.text = selectedFilm.overview;
     }
 
-    resetFilmIconOpacities(row) {
+    resetFilmIconOpacities = (row) => {
       row.items.forEach(item => (item.children[0].alpha = 0.4));
       row.selected['children'][0].alpha = 1;
     }
 
-    setRowsXPosition(row, selectedIndex) {
+    setRowsXPosition = (row, selectedIndex) => {
       const filmWidth = 180;
       const halfOfFilmsLength = films.length / 2;
       const filmsToOffset = halfOfFilmsLength - selectedIndex;
@@ -7324,7 +7326,7 @@ var APP_com_metrological_app_newapp = (function () {
       row.x = xOfCentreFilm - offsetAmount;
     }
 
-    setUpFilmIconProperties() {
+    setUpFilmIconProperties = () => {
       const row = this.tag('RowOfFilmImages');
       row.items.forEach((item, index) => {
         const icon = item.children[0];
@@ -7334,12 +7336,14 @@ var APP_com_metrological_app_newapp = (function () {
       });
     }
 
-    _getFocused() {
+    //5d32c1fee47f71010ced6f1e582cc0c3
+
+    _getFocused = () => {
       this.renderLatestUpdate();
       return this.tag('RowOfFilmImages')
     }
 
-    _init() {
+    _init = () => {
       this.tag('RowOfFilmImages').selectedIndex = films.length / 2;
       this.setUpFilmIconProperties();
       this.renderLatestUpdate();

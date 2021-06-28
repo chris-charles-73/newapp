@@ -1,10 +1,11 @@
 import { Lightning, Utils } from '@lightningjs/sdk'
 import { Row, Icon, Button } from '@lightningjs/ui-components'
 import { films } from '../static/films.json'
+//import { fallbackCachedFilms } from '../static/films.json'
 
 export default class App extends Lightning.Component {
   static _template() {
-    return {
+    return { 
       Background: {
         w: 1920,
         h: 980,
@@ -44,7 +45,7 @@ export default class App extends Lightning.Component {
         },
       },
       RowOfFilmImages: {
-        type: Row,
+        type: Row, 
         x: 960 - 90,
         y: 200,
         h: 225,
@@ -66,7 +67,7 @@ export default class App extends Lightning.Component {
     }
   }
 
-  renderLatestUpdate() {
+  renderLatestUpdate = () => {
     const row = this.tag('RowOfFilmImages')
     const selectedIndex = row.selectedIndex
     this.resetFilmIconOpacities(row)
@@ -74,18 +75,18 @@ export default class App extends Lightning.Component {
     this.updateTexts(selectedIndex)
   }
 
-  updateTexts(selectedIndex) {
+  updateTexts = (selectedIndex) => {
     const selectedFilm = films[selectedIndex]
     this.tag('TextTitle').text.text = selectedFilm.title
     this.tag('TextOverview').text.text = selectedFilm.overview
   }
 
-  resetFilmIconOpacities(row) {
+  resetFilmIconOpacities = (row) => {
     row.items.forEach(item => (item.children[0].alpha = 0.4))
     row.selected['children'][0].alpha = 1
   }
 
-  setRowsXPosition(row, selectedIndex) {
+  setRowsXPosition = (row, selectedIndex) => {
     const filmWidth = 180
     const halfOfFilmsLength = films.length / 2
     const filmsToOffset = halfOfFilmsLength - selectedIndex
@@ -97,7 +98,7 @@ export default class App extends Lightning.Component {
     row.x = xOfCentreFilm - offsetAmount
   }
 
-  setUpFilmIconProperties() {
+  setUpFilmIconProperties = () => {
     const row = this.tag('RowOfFilmImages')
     row.items.forEach((item, index) => {
       const icon = item.children[0]
@@ -107,12 +108,14 @@ export default class App extends Lightning.Component {
     })
   }
 
-  _getFocused() {
+  //5d32c1fee47f71010ced6f1e582cc0c3
+
+  _getFocused = () => {
     this.renderLatestUpdate()
     return this.tag('RowOfFilmImages')
   }
 
-  _init() {
+  _init = () => {
     this.tag('RowOfFilmImages').selectedIndex = films.length / 2
     this.setUpFilmIconProperties()
     this.renderLatestUpdate()
