@@ -3,7 +3,7 @@
  * SDK version: 4.4.0
  * CLI version: 2.5.0
  * 
- * Generated: Mon, 28 Jun 2021 07:19:05 GMT
+ * Generated: Mon, 28 Jun 2021 08:09:18 GMT
  */
 
 var APP_com_metrological_app_newapp = (function () {
@@ -7126,7 +7126,7 @@ var APP_com_metrological_app_newapp = (function () {
     onScreenEffect() {}
   }
 
-  var films = [
+  var fallbackCachedFilms = [
   	{
   		title: "Thor: Ragnarok",
   		poster_path: "https://www.themoviedb.org/t/p/w220_and_h330_face/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg",
@@ -7229,8 +7229,6 @@ var APP_com_metrological_app_newapp = (function () {
   	}
   ];
 
-  //import { fallbackCachedFilms } from '../static/films.json'
-
   class App extends lng.Component {
     static _template() {
       return { 
@@ -7251,7 +7249,7 @@ var APP_com_metrological_app_newapp = (function () {
           y: 90,
           w: 1920,
           text: {
-            text: films[0].title,
+            text: '',
             fontFace: 'Segoe Print, Arial',
             fontSize: 64,
             textAlign: 'center',
@@ -7263,7 +7261,7 @@ var APP_com_metrological_app_newapp = (function () {
           y: 490,
           w: 1920,
           text: {
-            text: films[0].overview,
+            text: '',
             fontFace: 'Segoe Print, Arial',
             fontSize: 28,
             wordWrapWidth: 1100,
@@ -7279,7 +7277,7 @@ var APP_com_metrological_app_newapp = (function () {
           h: 225,
           itemSpacing: 30,
           scrollIndex: 0,
-          items: Array.apply(null, { length: films.length }).map((_, i) => ({
+          items: Array.apply(null, { length: 20 }).map((_, i) => ({
             type: Button$1,
             w: 150,
             h: 225,
@@ -7298,25 +7296,26 @@ var APP_com_metrological_app_newapp = (function () {
     renderLatestUpdate = () => {
       const row = this.tag('RowOfFilmImages');
       const selectedIndex = row.selectedIndex;
-      this.resetFilmIconOpacities(row);
+      this.resetFilmIconOpacities();
       this.setRowsXPosition(row, selectedIndex);
       this.updateTexts(selectedIndex);
     }
 
     updateTexts = (selectedIndex) => {
-      const selectedFilm = films[selectedIndex];
+      const selectedFilm = this.films[selectedIndex];
       this.tag('TextTitle').text.text = selectedFilm.title;
       this.tag('TextOverview').text.text = selectedFilm.overview;
     }
 
-    resetFilmIconOpacities = (row) => {
+    resetFilmIconOpacities = () => {
+      const row = this.tag('RowOfFilmImages');
       row.items.forEach(item => (item.children[0].alpha = 0.4));
       row.selected['children'][0].alpha = 1;
     }
 
     setRowsXPosition = (row, selectedIndex) => {
       const filmWidth = 180;
-      const halfOfFilmsLength = films.length / 2;
+      const halfOfFilmsLength = this.films.length / 2;
       const filmsToOffset = halfOfFilmsLength - selectedIndex;
       let xOfCentreFilm = 960 - 90;
       let offsetAmount = 0;
@@ -7326,27 +7325,45 @@ var APP_com_metrological_app_newapp = (function () {
       row.x = xOfCentreFilm - offsetAmount;
     }
 
+    films = []
+
     setUpFilmIconProperties = () => {
+      console.log('ok');
       const row = this.tag('RowOfFilmImages');
       row.items.forEach((item, index) => {
         const icon = item.children[0];
-        icon.src = films[index].poster_path;
+        icon.src = 'https://www.themoviedb.org/t/p/w220_and_h330_face/' + this.films[index].poster_path;
         icon.h = 225;
         icon.w = 150;
       });
     }
 
-    //5d32c1fee47f71010ced6f1e582cc0c3
+    getFilmsFromAPI = (callback) => {
+      fetch('https://api.themoviedb.org/3/discover/movie?api_key=5d32c1fee47f71010ced6f1e582cc0c3')
+        .then(response => response.json())
+        .then(data => callback(data))
+        .catch((error) => {
+          console.log('error whilst requesting films from API' + error);
+          this.films = fallbackCachedFilms;
+        });
+    }
 
     _getFocused = () => {
-      this.renderLatestUpdate();
+      if (this.films.length > 0) {
+        this.renderLatestUpdate();
+      }
       return this.tag('RowOfFilmImages')
     }
 
     _init = () => {
-      this.tag('RowOfFilmImages').selectedIndex = films.length / 2;
-      this.setUpFilmIconProperties();
-      this.renderLatestUpdate();
+      this.getFilmsFromAPI((data) => {
+        this.films = data.results;
+        this.tag('RowOfFilmImages').selectedIndex = this.films.length / 2;
+        this.setUpFilmIconProperties();
+        this.resetFilmIconOpacities();
+        this.renderLatestUpdate();
+        this._getFocused();
+      });
     }
   }
 
